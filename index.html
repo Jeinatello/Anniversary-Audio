@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,24 +8,10 @@
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(ellipse at bottom, #ffe6f0 0%, #ffccdd 100%);
+      background-color: #ffe6f0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       overflow: hidden;
-    }
-
-    .stars {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
-      z-index: 0;
-      animation: twinkle 20s linear infinite;
-    }
-
-    @keyframes twinkle {
-      0% { background-position: 0 0; }
-      100% { background-position: -1000px 1000px; }
     }
 
     .slideshow {
@@ -36,7 +21,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1;
     }
 
     .slide {
@@ -61,17 +45,14 @@
       font-size: 1.5em;
       color: #b30059;
       padding: 0 10%;
-      z-index: 2;
+      animation: fadeIn 1.5s ease-in-out;
+      z-index: 998;
+      transition: opacity 1s ease;
     }
 
-    .message span {
-      display: inline-block;
-      opacity: 0;
-      animation: typewriter 0.05s forwards;
-    }
-
-    @keyframes typewriter {
-      to { opacity: 1; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .music-control {
@@ -99,45 +80,35 @@
     .music-control button:hover {
       background-color: #e05591;
     }
-
-    .download-btn {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 999;
-    }
-
-    .download-btn button {
-      background-color: #ff99bb;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      color: white;
-      font-size: 0.9em;
-      cursor: pointer;
-    }
-
-    .download-btn button:hover {
-      background-color: #d96d96;
-    }
   </style>
 </head>
 <body>
 
-<div class="stars"></div>
-
 <div class="slideshow">
-  <!-- Slides (same as before) -->
   <img class="slide active" src="https://drive.google.com/thumbnail?id=1411fpb5ch8XbKdCq2mswOMPMJtaA-ObF" />
-  <!-- (add more as needed) -->
+  <img class="slide" src="https://drive.google.com/thumbnail?id=143BOdGaEm0K1722vXaVtHDP3XIZvJufS">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=1420TRRwRX9PL8ME8yVbBIjHaVnruIyfP">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14g0Bm2KrKMtzieRJ28GQC6Y5y8yvlItR">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=143PYPziSXw2v8UVbkz_M4iIeK1kIS3Gg">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14WMtHsBff5PuSEGQ73syQNNDwhkVjv0-">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14Mh7jFmeED4Cw0negCvBsmZ_4TaKPgHn">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14GbLpPR8UKZeqrkH9sr--oIGf5N3Wnlr">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14IlRLGmcWcegtFPH3AVrATFg_kP1kkjt">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14dGNacLE11E-ld-6rNOQnY8GvuVb5SWi">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=13r-dk9bZRwkCrVLbNpTyQ3n_f3RK4O1E">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14gCBSsldpQCO2V_qbZz1GYeS1tP688u_">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14gDlmYnPiqDG7g8IcWVdk259uX6eBKjy">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14eO_NNgGod-dm6t_e9vz8exXVQYQXPTK">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14DgVxPHVf_eBUsBEV7SbI8K476dMW3Cn">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14LmYXZk5q1bA7e4T9mBH2isdJWRqUrm7">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14U5fUaTtVqlQKR_NaJ9hCcke9MuSKcqV">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14IW3ItYsuQcDyR-29lK4UDKUrhRnE9Xb">
+  <img class="slide" src="https://drive.google.com/thumbnail?id=14VjKwV-TfFeeDpIbRMJGNd3elBc6pwFe">
 </div>
 
-<div class="music-control">
+<!-- 🎵 Music Player -->
+<div class="music-control" id="musicControl">
   <button id="toggleMusic">▶ Play</button>
-</div>
-
-<div class="download-btn">
-  <button onclick="downloadPage()">⬇ Save Page</button>
 </div>
 
 <audio id="bgMusic" preload="auto">
@@ -148,7 +119,6 @@
 <div class="message" id="message"></div>
 
 <script>
-  // Slideshow
   const slides = document.querySelectorAll('.slide');
   let currentSlide = 0;
   setInterval(() => {
@@ -157,7 +127,6 @@
     slides[currentSlide].classList.add('active');
   }, 5000);
 
-  // Typewriter Message
   const messageLines = [
     "So, it's been 4 years since we started huh?",
     "Who would've thought that me and you will click and have a synergy like this",
@@ -183,57 +152,43 @@
     "I am with you always, and will always be here for you.",
     "I love you, and that's not just mere words, that's what my heart and mind tells me.",
     "I love you.",
+    "I really have no more idea on what to say or what to expect from here on out,",
+    "But just know that I'll always be here to love and support you while also cherishing every part of you.",
     "You have me through hardships and good times,",
     "You have me always.",
     "Ad astra, per aspera. My baba.",
     "Happy 4th year anniversary my baba."
   ];
 
-  const messageElement = document.getElementById("message");
+  const messageElement = document.getElementById('message');
   let lineIndex = 0;
-
-  function showTypewriter(line) {
-    messageElement.innerHTML = '';
-    line.split('').forEach((char, i) => {
-      const span = document.createElement('span');
-      span.textContent = char;
-      span.style.animationDelay = `${i * 30}ms`;
-      messageElement.appendChild(span);
-    });
-  }
-
-  function nextLine() {
+  function showNextLine() {
     if (lineIndex < messageLines.length) {
-      showTypewriter(messageLines[lineIndex]);
-      lineIndex++;
-      setTimeout(nextLine, 3500);
+      messageElement.style.opacity = 0;
+      setTimeout(() => {
+        messageElement.innerHTML = messageLines[lineIndex];
+        messageElement.style.opacity = 1;
+        lineIndex++;
+        setTimeout(showNextLine, 3500);
+      }, 500);
     }
   }
+  showNextLine();
 
-  nextLine();
+  window.addEventListener('DOMContentLoaded', () => {
+    const bgMusic = document.getElementById("bgMusic");
+    const toggleBtn = document.getElementById("toggleMusic");
 
-  // Music
-  const music = document.getElementById("bgMusic");
-  const toggle = document.getElementById("toggleMusic");
-
-  toggle.addEventListener("click", () => {
-    if (music.paused) {
-      music.play();
-      toggle.textContent = "⏸ Pause";
-    } else {
-      music.pause();
-      toggle.textContent = "▶ Play";
-    }
+    toggleBtn.addEventListener("click", () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        toggleBtn.textContent = "⏸ Pause";
+      } else {
+        bgMusic.pause();
+        toggleBtn.textContent = "▶ Play";
+      }
+    });
   });
-
-  // Save Page (for keepsake)
-  function downloadPage() {
-    const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "anniversary.html";
-    a.click();
-  }
 </script>
 
 </body>
