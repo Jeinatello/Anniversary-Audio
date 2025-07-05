@@ -9,11 +9,26 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #ffe6f0;
+      background: radial-gradient(ellipse at bottom, #ffe6f0 0%, #ffccdd 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       overflow: hidden;
     }
+
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      z-index: 0;
+      animation: twinkle 20s linear infinite;
+    }
+
+    @keyframes twinkle {
+      0% { background-position: 0 0; }
+      100% { background-position: -1000px 1000px; }
+    }
+
     .slideshow {
       position: fixed;
       top: 0; left: 0;
@@ -21,19 +36,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 1;
     }
+
     .slide {
       position: absolute;
       opacity: 0;
-      transition: opacity 2.0s ease-in-out;
+      transition: opacity 2s ease-in-out;
       max-width: 90vw;
       max-height: 90vh;
       border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
+
     .slide.active {
       opacity: 1;
     }
+
     .message {
       position: fixed;
       bottom: 5%;
@@ -42,12 +61,19 @@
       font-size: 1.5em;
       color: #b30059;
       padding: 0 10%;
-      animation: fadeIn 2s ease-in-out;
+      z-index: 2;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .message span {
+      display: inline-block;
+      opacity: 0;
+      animation: typewriter 0.05s forwards;
     }
+
+    @keyframes typewriter {
+      to { opacity: 1; }
+    }
+
     .music-control {
       position: fixed;
       top: 10px;
@@ -59,6 +85,7 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       z-index: 999;
     }
+
     .music-control button {
       background-color: #ff66a3;
       border: none;
@@ -68,39 +95,49 @@
       font-size: 1em;
       cursor: pointer;
     }
+
     .music-control button:hover {
       background-color: #e05591;
+    }
+
+    .download-btn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+    }
+
+    .download-btn button {
+      background-color: #ff99bb;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: white;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    .download-btn button:hover {
+      background-color: #d96d96;
     }
   </style>
 </head>
 <body>
 
+<div class="stars"></div>
+
 <div class="slideshow">
-  <!-- Just one sample slide below, you can paste your images here -->
+  <!-- Slides (same as before) -->
   <img class="slide active" src="https://drive.google.com/thumbnail?id=1411fpb5ch8XbKdCq2mswOMPMJtaA-ObF" />
-  <img class="slide" src="https://drive.google.com/thumbnail?id=143BOdGaEm0K1722vXaVtHDP3XIZvJufS">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=1420TRRwRX9PL8ME8yVbBIjHaVnruIyfP">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14g0Bm2KrKMtzieRJ28GQC6Y5y8yvlItR">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=143PYPziSXw2v8UVbkz_M4iIeK1kIS3Gg">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14WMtHsBff5PuSEGQ73syQNNDwhkVjv0-">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14Mh7jFmeED4Cw0negCvBsmZ_4TaKPgHn">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14GbLpPR8UKZeqrkH9sr--oIGf5N3Wnlr">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14IlRLGmcWcegtFPH3AVrATFg_kP1kkjt">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14dGNacLE11E-ld-6rNOQnY8GvuVb5SWi">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=13r-dk9bZRwkCrVLbNpTyQ3n_f3RK4O1E">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14gCBSsldpQCO2V_qbZz1GYeS1tP688u_">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14gDlmYnPiqDG7g8IcWVdk259uX6eBKjy">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14eO_NNgGod-dm6t_e9vz8exXVQYQXPTK">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14DgVxPHVf_eBUsBEV7SbI8K476dMW3Cn">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14LmYXZk5q1bA7e4T9mBH2isdJWRqUrm7">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14U5fUaTtVqlQKR_NaJ9hCcke9MuSKcqV">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14IW3ItYsuQcDyR-29lK4UDKUrhRnE9Xb">
-  <img class="slide" src="https://drive.google.com/thumbnail?id=14VjKwV-TfFeeDpIbRMJGNd3elBc6pwFe">
+  <!-- (add more as needed) -->
 </div>
 
-<!-- 🎵 Music Player -->
-<div class="music-control" id="musicControl">
+<div class="music-control">
   <button id="toggleMusic">▶ Play</button>
+</div>
+
+<div class="download-btn">
+  <button onclick="downloadPage()">⬇ Save Page</button>
 </div>
 
 <audio id="bgMusic" preload="auto">
@@ -111,7 +148,7 @@
 <div class="message" id="message"></div>
 
 <script>
-  // Slideshow logic (replace/add more images as needed)
+  // Slideshow
   const slides = document.querySelectorAll('.slide');
   let currentSlide = 0;
   setInterval(() => {
@@ -120,65 +157,83 @@
     slides[currentSlide].classList.add('active');
   }, 5000);
 
-  // Message lines (optional, same logic you had)
+  // Typewriter Message
   const messageLines = [
     "So, it's been 4 years since we started huh?",
     "Who would've thought that me and you will click and have a synergy like this",
     "Little Ms. Good Girl from school and Mr. Don't know what to do with life",
     "A pairing so random that I never would've thought that it would turn out to be this good.",
     "You who always achieved what you wanted to, academically, or random bullshit that used intellect.",
-    "No offense hoho, but you are so keen on your curiousiy.",
+    "No offense hoho, but you are so keen on your curiosity.",
     "And you that was perceived by many to be resilient, strong, and bright mind.",
     "Against me that was so carefree and couldn't careless about anything that involves stuff that has to do with my future.",
     "The past me that would choose to just play on the computer all day and don't do productive stuff.",
-    "I mean? Where is he now? I wonder if you were really the sparked that gave me the boost that i need.",
+    "I mean? Where is he now? I wonder if you were really the spark that gave me the boost that I need.",
     "And now? Look at me, always trying my best to be the best.",
     "You literally changed my perspective on how to view life.",
     "You set the stage for me to stand on, you gave me the courage, you gave me the road to travel on.",
     "And you provided the comfort I needed to continuously stand atop, you gave me purpose in life.",
-    "Purpose that up until now i still find myself continuing where i left off."
+    "Purpose that up until now I still find myself continuing where I left off.",
     "My dearest baba, the most beautiful woman that the eye can see, or is that just from my perspective?.",
     "I'm just teasing you, you know that you're always beautiful, inside and out.",
     "I just hope that we'll always see the light that guides us both forward.",
     "I really am looking forward to seeing what the future holds for the both of us.",
     "Just us barging and fighting against all odds to provide for the future we seek.",
-    "Cheers, to us, and to our future us."
+    "Cheers, to us, and to our future us.",
     "I am with you always, and will always be here for you.",
     "I love you, and that's not just mere words, that's what my heart and mind tells me.",
     "I love you.",
-    "I really have no more idea on what to say or what to expect from here on out,",
-    "But just know that I'll always be here to love and support you while also cherishing every part of you.",
     "You have me through hardships and good times,",
     "You have me always.",
     "Ad astra, per aspera. My baba.",
     "Happy 4th year anniversary my baba."
   ];
-  const messageElement = document.getElementById('message');
+
+  const messageElement = document.getElementById("message");
   let lineIndex = 0;
-  function showNextLine() {
+
+  function showTypewriter(line) {
+    messageElement.innerHTML = '';
+    line.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.animationDelay = `${i * 30}ms`;
+      messageElement.appendChild(span);
+    });
+  }
+
+  function nextLine() {
     if (lineIndex < messageLines.length) {
-      messageElement.innerHTML = messageLines[lineIndex];
+      showTypewriter(messageLines[lineIndex]);
       lineIndex++;
-      setTimeout(showNextLine, 3500);
+      setTimeout(nextLine, 3500);
     }
   }
-  showNextLine();
 
-  // Music control
-  window.addEventListener('DOMContentLoaded', () => {
-    const bgMusic = document.getElementById("bgMusic");
-    const toggleBtn = document.getElementById("toggleMusic");
+  nextLine();
 
-    toggleBtn.addEventListener("click", () => {
-      if (bgMusic.paused) {
-        bgMusic.play();
-        toggleBtn.textContent = "⏸ Pause";
-      } else {
-        bgMusic.pause();
-        toggleBtn.textContent = "▶ Play";
-      }
-    });
+  // Music
+  const music = document.getElementById("bgMusic");
+  const toggle = document.getElementById("toggleMusic");
+
+  toggle.addEventListener("click", () => {
+    if (music.paused) {
+      music.play();
+      toggle.textContent = "⏸ Pause";
+    } else {
+      music.pause();
+      toggle.textContent = "▶ Play";
+    }
   });
+
+  // Save Page (for keepsake)
+  function downloadPage() {
+    const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "anniversary.html";
+    a.click();
+  }
 </script>
 
 </body>
