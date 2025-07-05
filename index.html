@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 4th Anniversary, Baba 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffe6f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      overflow: hidden;
+    }
+    .slideshow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1.0s ease-in-out;
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    .message {
+      position: fixed;
+      bottom: 5%;
+      width: 83%;
+      text-align: center;
+      font-size: 1.5em;
+      color: #b30059;
+      padding: 0 10%;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .music-control {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #fff0f5;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 0.9em;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .music-control button {
+      background-color: #ff66a3;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .music-control button:hover {
+      background-color: #e05591;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slideshow">
+  <!-- Just one sample slide below, you can paste your images here -->
+  <img class="slide active" src="https://drive.google.com/thumbnail?id=1411fpb5ch8XbKdCq2mswOMPMJtaA-ObF" />
+</div>
+
+<!-- 🎵 Music Player -->
+<div class="music-control" id="musicControl">
+  <button id="toggleMusic">▶ Play</button>
+</div>
+
+<audio id="bgMusic" preload="auto">
+  <source src="we-could-happen.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<div class="message" id="message"></div>
+
+<script>
+  // Slideshow logic (replace/add more images as needed)
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 5000);
+
+  // Message lines (optional, same logic you had)
+  const messageLines = [
+    "Happy 4th Year Anniversary, Baba.",
+    "I love you more than words can say.",
+    "Through every season, every moment, I'm with you.",
+    "Here's to forever with you. 💖"
+  ];
+  const messageElement = document.getElementById('message');
+  let lineIndex = 0;
+  function showNextLine() {
+    if (lineIndex < messageLines.length) {
+      messageElement.innerHTML = messageLines[lineIndex];
+      lineIndex++;
+      setTimeout(showNextLine, 3500);
+    }
+  }
+  showNextLine();
+
+  // Music control
+  const bgMusic = document.getElementById("bgMusic");
+  const toggleBtn = document.getElementById("toggleMusic");
+
+  toggleBtn.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play();
+      toggleBtn.textContent = "⏸ Pause";
+    } else {
+      bgMusic.pause();
+      toggleBtn.textContent = "▶ Play";
+    }
+  });
+</script>
+
+</body>
+</html>
